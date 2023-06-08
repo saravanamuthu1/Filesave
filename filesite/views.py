@@ -14,9 +14,6 @@ class Homeview(ListView):
             usernamepage=request.POST.get('uname')
             password1=request.POST.get('pwd1')
             password2=request.POST.get('pwd2')
-            print(usernamepage)
-            print(password1)
-            print(password2)
             if password1 == password2:
                 dataObject=User(userName=usernamepage,password=password1)
                 dataObject.save()
@@ -27,6 +24,23 @@ class Homeview(ListView):
                 return redirect('homepage')
 
 
-class Signupview(ListView):
+class Loginview(ListView):
     def get(self,request):
-        return render(request,'main/signup.html')
+        return render(request,'main/login.html')
+    def post(self,request):
+        if request.method == 'POST':
+            loginusername=request.POST['loginuname']
+            loginpassword=request.POST['loginpwd']
+            print(loginusername)
+            print(loginpassword)
+            usestatus= User.objects.filter(userName=loginusername,password=loginpassword)
+            if usestatus:
+                messages.success(request,'you have successfully logged in')
+                return redirect('uploadpage')
+            else:
+                messages.warning(request,'Incorrect username or password')
+                return redirect('loginpage')
+        
+class Uploadview(ListView):
+    def get(self,request):
+        return render(request,'main/upload.html')

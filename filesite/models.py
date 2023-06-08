@@ -2,8 +2,8 @@ from django.db import models
 
 # add user class
 class User(models.Model):
-    userName = models.CharField(max_length=50)
-    password=models.CharField(max_length=50)
+    userName = models.CharField(max_length=50,default='admin',null=False)
+    password=models.CharField(max_length=50,default='root',null=False)
     def __str__(self):
         return self.user
 # add post clas     
