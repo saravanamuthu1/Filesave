@@ -40,6 +40,12 @@ class Loginview(ListView):
             else:
                 messages.warning(request,'Incorrect username or password')
                 return redirect('loginpage')
+class Logoutview(ListView):
+    def get(self,request):
+        return render(request,'main/upload.html')
+    def post(self,request):
+        if request.method == 'POST':
+            return redirect('loginpage')
         
 class Uploadview(ListView):
     def get(self,request):
