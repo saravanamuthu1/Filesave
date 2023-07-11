@@ -3,12 +3,9 @@
 {% block content %}
 <h1>this is the upload page</h1>
 <form action="{% url 'uploadpage' %}" method="post">
-<<<<<<< HEAD
 {% csrf_token %}    
 <button type="button" class="btn btn-primary">Logout</button>
-=======
     {% csrf_token %}
 <button>Logout</button>
->>>>>>> feature/login
 </form>
 {% endblock content %}
