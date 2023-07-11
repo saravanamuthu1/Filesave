@@ -50,3 +50,10 @@ class Logoutview(ListView):
 class Uploadview(ListView):
     def get(self,request):
         return render(request,'main/upload.html')
+    
+class Logoutview(ListView):
+    def get(self,request):
+        return render(request,'main/upload.html')
+    def post(self,request):
+        if request.method == 'POST':
+            return redirect('homepage')
