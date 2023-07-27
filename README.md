@@ -12,11 +12,13 @@ The File Saving App is a simple web application built with Django and SQLite3 th
 - Responsive design, compatible with various devices and screen sizes.
   
 ## How to run this app
+
+
 - clone the repository <br>
 - cd filesave <br>
 - python -m venv venv <br>
-- venv\Scripts\activate -for windows<br>
-- source venv/bin/activate -for linux<br>
+- venv\Scripts\activate -for windows <br>
+- source venv/bin/activate -for linux <br>
 - pip install -r requirements.txt <br>
 - python manage.py migrate <br>
 - python manage.py runserver <br>
