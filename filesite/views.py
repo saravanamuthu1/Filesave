@@ -31,23 +31,32 @@ class Loginview(ListView):
         if request.method == 'POST':
             loginusername=request.POST['loginuname']
             loginpassword=request.POST['loginpwd']
-            print(loginusername)
-            print(loginpassword)
             usestatus= User.objects.filter(userName=loginusername,password=loginpassword)
             if usestatus:
-                return redirect('uploadpage')
+                request.session['user_name'] = loginusername
+                return redirect('uploadpage',user_name=loginusername)
             else:
                 messages.warning(request,'Incorrect username or password')
                 return redirect('loginpage')
 class Uploadview(ListView):
-    def get(self,request):
+    def get(self,request,user_name=None):
+        return render(request,'main/upload.html')
+    def post(self,request,user_name=None):
+        title = request.POST['title']
+        desc =request.POST['desc']
+        file_name= request.FILES['files']
+        user_obj = User.objects.get(userName=user_name)
+        print(user_obj)
+        dataObject=Post(user=user_obj,title=title,desc=desc,file_field=file_name)
+        dataObject.save()
+        messages.success(request,'you have uploaded your file succcessfully')
         return render(request,'main/upload.html')
 
 class Logoutview(ListView):
     def get(self, request):
         messages.success(request,"you have been logged out")
         try:
-            del request.session['user']
+            del request.session['user_name']
         except:
             return redirect('homepage') 
         return redirect('homepage')
